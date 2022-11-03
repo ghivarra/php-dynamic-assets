@@ -10,6 +10,7 @@ require ROOTPATH . 'vendor/autoload.php';
 // load dotenv
 $dotenv = Dotenv\Dotenv::createImmutable(ROOTPATH);
 $dotenv->safeLoad();
+define('ENV', $_ENV['ENVIRONMENT']);
 
 // output buffer start
 ob_start();
@@ -29,3 +30,16 @@ echo $routing->parse();
 
 // done output buffer
 ob_flush();
+
+// put memory get usage
+if (ENV == 'development')
+{
+	$peak = memory_get_peak_usage();
+	$peak = round(($peak / 1000000), 2) . ' MB';
+
+	$file = fopen(ROOTPATH . 'tmp/memory.txt', 'w+');
+	fwrite($file, $peak);
+	fclose($file);
+
+	unset($file);
+}
