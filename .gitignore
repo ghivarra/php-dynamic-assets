@@ -6,6 +6,9 @@
 /assets/sass/*
 !/assets/sass
 
+# ICON
+/public/favicon.ico
+
 #-------------------------
 # Operating Specific Junk Files
 #-------------------------
