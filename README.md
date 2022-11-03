@@ -5,3 +5,4 @@ Dynamic Assets for auto-render SCSS, auto-minified JS, and Image Manipulator usi
 - SCSS PHP
 - Intervention Image
 - matthiasmullie/minify
+- Kint (for development)
