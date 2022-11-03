@@ -24,3 +24,4 @@ $route = new Routing();
 $route->add('/', 'App\\Controller\\HomeController::index');
 $route->add('/assets/images/(:any)', 'App\\Controller\\ImageController::index');
 $route->add('/assets/css/(:any)', 'App\\Controller\\SASSController::index');
+$route->add('/assets/js/(:any)', 'App\\Controller\\JavascriptController::index');
