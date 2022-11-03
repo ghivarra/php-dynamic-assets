@@ -50,102 +50,87 @@ class Routing
 
 		// put into uri
 		$currentRoute = empty(Self::$slugs) ? '' : implode('/', Self::$slugs);
-		Routing::$uri = $currentRoute;
+		Self::$uri = $currentRoute;
 	}
 
 	//=================================================================================================
 
 	public function parse()
 	{
-		$currentRoute = '';
 		$findMatched  = FALSE;
 		$params       = [];
 
-		foreach (Self::$rules as $num => $item):
+		// reverse array
+		$checkedItem = [];
+
+		if (!empty(Self::$slugs) > 0)
+		{
+			$slugs = Self::$slugs;
+			$uri   = '';
+
+			foreach ($slugs as $n => $item):
+
+				$uri = str_ireplace('/(:any)', '', $uri);
+				$uri .= '/' . $item;
+
+				array_push($checkedItem, $uri);
+
+				if (isset($slugs[($n + 1)]))
+				{
+					array_push($checkedItem, "{$uri}/(:any)");
+				}
+
+			endforeach;
+		}
+
+		// reverse
+		$checkedItem = array_reverse($checkedItem);
+
+		if (!empty($checkedItem))
+		{
+			foreach ($checkedItem as $n => $item):
+
+				if (in_array($item, Self::$rules))
+				{
+					$findMatched = TRUE;
+					$key = array_search($item, Self::$rules);
+					$num = $n;
+					break;
+				}
+
+			endforeach;
 
 			if ($findMatched)
 			{
-				break;
+				$rules   = str_replace('/(:any)', '', Self::$rules[$key]);
+				$realURI = Self::$uri;
+				$realURI = substr($realURI, strlen($rules));
+				$params  = explode('/', $realURI);
 			}
+		}
 
-			$ruleItems = [];
-			$ruleItem  = explode('/', $item);
-
-			if (empty($ruleItem) OR empty(Self::$slugs))
-			{
-				continue;
-			}
-
-			foreach ($ruleItem as $val)
-			{
-				if (!empty($val))
-				{
-					array_push($ruleItems, $val);
-				}
-			}
-
-			if (empty($ruleItems))
-			{
-				continue;
-			}
-
-			foreach ($ruleItems as $n => $val)
-			{
-				if (!isset(Self::$slugs[$n]))
-				{
-					$currentRoute = '';
-					break;
-				}
-
-				if ($val == Self::$slugs[$n] OR $val === '(:any)')
-				{
-					$currentRoute .= '/' . $val;
-
-					if ($val !== '(:any)')
-					{
-						continue;
-					}
-
-					if ($val === '(:any)')
-					{
-						foreach (Self::$slugs as $x => $slug):
-
-							if ($x >= $n)
-							{
-								array_push($params, $slug);
-							}
-
-						endforeach;
-
-						$findMatched = TRUE;
-						break;
-					}
-
-				} else {
-
-					break;
-				}
-			}
-
-		endforeach;
-
-		// find in array
-		if (!in_array($currentRoute, Self::$rules))
+		// if not matched
+		if (!$findMatched)
 		{
-			$currentRoute = '/' . $currentRoute;
+			$currentRoute = '';
 
 			if (!in_array($currentRoute, Self::$rules))
 			{
-				die('Routes not found.');
+				$currentRoute = '/';
+
+				if (!in_array($currentRoute, Self::$rules))
+				{
+					die('Routes not found.');
+
+				} else {
+
+					$key = array_search($currentRoute, Self::$rules);
+				}
 
 			} else {
 
 				$key = array_search($currentRoute, Self::$rules);
 			}
-
-		} else {
-
-			$key = array_search($currentRoute, Self::$rules);
 		}
 
 		$controller = Self::$class[$key];
