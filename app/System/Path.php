@@ -1,0 +1,4 @@
+<?php
+
+define('APPPATH', ROOTPATH . 'app' . DIRECTORY_SEPARATOR);
+define('ASSETPATH', ROOTPATH . 'assets' . DIRECTORY_SEPARATOR);
