@@ -22,3 +22,4 @@ $route = new Routing();
 
 // routes config
 $route->add('/', 'App\\Controller\\HomeController::index');
+$route->add('/assets/images/(:any)', 'App\\Controller\\ImageController::index');
