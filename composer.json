@@ -17,7 +17,8 @@
     "require": {
         "php": "^7.4||^8.0",
         "intervention/image": "^2.7",
-        "scssphp/scssphp": "^1.11"
+        "scssphp/scssphp": "^1.11",
+        "vlucas/phpdotenv": "^5.5"
     },
     "require-dev": {
         "kint-php/kint": "^4.2"
