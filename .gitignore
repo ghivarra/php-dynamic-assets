@@ -1,10 +1,11 @@
 # ENVIRONMENT FILES
 /assets/images/*
-!/assets/images
+!/assets/images/index.html
 /assets/js/*
-!/assets/js
+!/assets/js/index.html
 /assets/sass/*
-!/assets/sass
+!/assets/sass/index.html
+!/assets
 
 # ICON
 /public/favicon.ico
@@ -14,6 +15,7 @@
 #-------------------------
 .phpintel
 /tmp/*
+!/tmp/index.html
 
 # OS X
 .DS_Store
