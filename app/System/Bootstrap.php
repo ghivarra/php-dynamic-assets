@@ -29,7 +29,7 @@ require ROOTPATH . 'app/Config/Routes.php';
 echo $routing->parse();
 
 // done output buffer
-ob_flush();
+ob_end_flush();
 
 // put memory get usage
 if (ENV == 'development')
@@ -41,5 +41,14 @@ if (ENV == 'development')
 	fwrite($file, $peak);
 	fclose($file);
 
+	// set time
+	$time = floor(microtime(true) * 1000) - START;
+	$time = round(($time / 1000), 3);
+
+	$file = fopen(ROOTPATH . 'tmp/time.txt', 'w+');
+	fwrite($file, $time . ' Detik');
+	fclose($file);
+
+	// unset
 	unset($file);
 }
