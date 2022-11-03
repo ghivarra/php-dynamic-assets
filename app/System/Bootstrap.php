@@ -16,10 +16,13 @@ ob_start();
 
 // load routing
 require ROOTPATH . 'app/System/Routing.php';
-require ROOTPATH . 'app/Config/Routes.php';
 
-// start routing
+// store uri
 $routing = new \Ghivarra\Routing();
+$routing->storeUri();
+
+// load routes config
+require ROOTPATH . 'app/Config/Routes.php';
 
 // returning data
 echo $routing->parse();

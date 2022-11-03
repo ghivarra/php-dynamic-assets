@@ -28,3 +28,18 @@ if (!function_exists('str_contains'))
         return $needle !== '' && mb_strpos($haystack, $needle) !== FALSE;
     }
 }
+
+/**
+ *
+ * Kint and exit
+ *
+ * @return bool
+ *
+**/
+if (!function_exists('dd'))
+{
+    function dd($data) {
+        d($data);
+        exit;
+    }
+}
