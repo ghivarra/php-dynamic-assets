@@ -19,11 +19,7 @@ class HomeController extends BaseController
 {
 	public function index()
 	{
-		$data = [
-			'hello' => $this->request->getGet('hello')
-		];
-
-		dd($data);
+		return json_encode('PHP Dynamic Library by Ghivarra Senandika Rushdie is working as intended');
 	}
 
 	//=================================================================================================================
