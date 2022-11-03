@@ -15,27 +15,15 @@
  *
 **/
 
-class HomeController
+class HomeController extends BaseController
 {
 	public function index()
 	{
-		d($_SERVER);
-	}
+		$data = [
+			'hello' => $this->request->getGet('hello')
+		];
 
-	//=================================================================================================================
-
-	public function hehe()
-	{
-		$path = func_get_args();
-		dd($path);
-	}
-
-	//=================================================================================================================
-
-	public function lol()
-	{
-		$path = func_get_args();
-		dd($path);
+		dd($data);
 	}
 
 	//=================================================================================================================

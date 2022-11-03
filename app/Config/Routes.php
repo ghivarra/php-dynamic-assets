@@ -15,10 +15,10 @@
  *
 **/
 
+use Ghivarra\Routing;
+
 // load routing class
-$route = new \Ghivarra\Routing();
+$route = new Routing();
 
 // routes config
-$route->add('/hehe/lol/(:any)', 'App\\Controller\\HomeController::lol');
-$route->add('/hehe/(:any)', 'App\\Controller\\HomeController::hehe');
 $route->add('/', 'App\\Controller\\HomeController::index');
