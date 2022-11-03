@@ -13,6 +13,7 @@
 # Operating Specific Junk Files
 #-------------------------
 .phpintel
+/tmp/*
 
 # OS X
 .DS_Store
